@@ -9,7 +9,7 @@ export const User: RouteRecordRaw =
     children: [
       {
         path: 'user',
-        component: () => import('@/views/component/video/videoDetail/Index.vue'),
+        component: () => import('@/views/common/Upload.vue'),
         meta: {icon: 'Guide', title: "首页", hideMenu: true}
       }
     ]

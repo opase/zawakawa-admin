@@ -34,9 +34,64 @@ export function getVideoByName(value: string, page: number) {
 }
 
 //获取视频详情
-export function getVideoInfoById(videoId:string) {
+export function getVideoInfoById(videoId: string) {
   return r.request<string[]>({
     url: `http://localhost:8081/api/user/video/info/${videoId}`,
-    method:`get`,
+    method: `get`,
+  });
+}
+
+//获取已上传分片数
+export function askChunk(md5: string) {
+  return r.request<string[]>({
+    url: `http://localhost:8081/api/admin/video/ask-chunk`,
+    method: `get`,
+    params: {
+      hash: md5
+    }
+  });
+}
+
+//上传视频文件
+export function uploadFileByChunk(formData: any) {
+  return r.request<string[]>({
+    url: `http://localhost:8081/api/admin/video/upload-chunk`,
+    method: `post`,
+    data: formData,
+  });
+}
+
+//获取视频url
+export function uploadedUrl(hash: string): Promise<string> {
+  return r.request<{ data: string }>({
+    url: `http://localhost:8081/api/admin/video/upload-video/${hash}`,
+    method: 'get'
+  }).then(res => res.data.data);
+}
+
+//上传封面获取url
+export function uploadCover(formData: any) {
+  return r.request<{data: string}>({
+    url: `http://localhost:8081/api/admin/video/upload-cover`,
+    method: `post`,
+    data:formData,
+  }).then(res => res.data.data);
+}
+
+//新增视频
+export function createVideoInfo(value: { title: string; imgSrc: string; date:string; type:number; producer:string; score:number; category:string; description:string; episode:number; videoSrc:string})  {
+  return r.request({
+    url: 'http://localhost:8081/api/admin/video',
+    method: 'post',
+    data: value
+  })
+}
+
+//更新视频
+export function updateVideoInfo(value: {id:string; title: string; imgSrc: string; date:string; type:number; producer:string; score:number; category:string; description:string; episode:number; videoSrc:string})  {
+  return r.request({
+    url: 'http://localhost:8081/api/admin/video',
+    method: 'put',
+    data: value
   })
 }
