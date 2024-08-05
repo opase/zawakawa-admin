@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import {useRouter} from "vue-router";
 import { appName,version } from "@/config/app"
-import {useUserStore} from "@/stores/user";
-import {User as UserType} from "@/stores/type";
+import {User as UserType, useUserStore} from "@/stores/user";
+// import {} from "@/stores/type";
 import {reactive, ref} from "vue";
-import {loginUser} from "@/api/demo/index"
+import {loginUser} from "@/api/common/index"
 import { ElMessage } from "element-plus";
 enum PasswordType {
   Password = "password",
@@ -33,7 +33,7 @@ const login = () => {
     .catch( ()=>{
       ElMessage({
         type: "error",
-        message: "登录失败QAQ",
+        message: "登录失败！",
       })
     })
 }
@@ -76,7 +76,7 @@ const login = () => {
 
           </template>
         </el-input>
-        <el-button size="large"  type="primary" @click="login()" style="width: 100%;">设置假token</el-button>
+        <el-button size="large"  type="primary" @click="login()" style="width: 100%;">登录</el-button>
       </el-form>
     </div>
   </div>

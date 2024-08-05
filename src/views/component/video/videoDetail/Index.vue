@@ -76,10 +76,7 @@
               >上传封面</el-button
             >
           </div>
-          <img
-            :src="form.imgSrc"
-            style="max-width: 200px; max-height: 300px"
-          />
+          <img :src="form.imgSrc" style="max-width: 200px; max-height: 300px" />
         </div>
       </el-form-item>
       <el-form-item label="描述：" required>
@@ -100,7 +97,11 @@ import { useRoute } from "vue-router";
 import { getVideoInfoById } from "@/api/video/index";
 import Upload from "@/views/common/Upload.vue";
 import { ElMessage } from "element-plus";
-import { uploadCover, createVideoInfo, updateVideoInfo } from "@/api/video/index";
+import {
+  uploadCover,
+  createVideoInfo,
+  updateVideoInfo,
+} from "@/api/video/index";
 const route = useRoute();
 const validateScore = (value: string) => {
   if (Number(value) < 0) {
@@ -152,25 +153,30 @@ const onSubmit = () => {
   if (form.value.episode === undefined) {
     form.value.episode = 0;
   }
-  if(form.value.id==null){
-    try{
-      createVideoInfo(form.value);
-      ElMessage.success("添加视频成功")
-    } catch(error){
+  if (form.value.id == null) {
+    try {
+      createVideoInfo(form.value).then(() => {
+        ElMessage.success("添加视频成功");
+      });
+    } catch (error) {
       ElMessage.error("添加视频失败");
-    }   
-  }else{
-    try{
-      updateVideoInfo(form.value);
-      ElMessage.success("更新视频成功");
-    } catch(error){
+    }
+  } else {
+    try {
+      updateVideoInfo(form.value).then(() => {
+        ElMessage.success("更新视频成功");
+      });
+    } catch (error) {
       ElMessage.error("更新视频失败");
-    }   
+    }
   }
   console.log(form.value);
 };
 const handleImgChange = (file: any, fileList: any[]) => {
-  const isImage = file.raw.type== 'image/png'||file.raw.type== 'image/jpeg' || file.raw.type== 'image/jpg';
+  const isImage =
+    file.raw.type == "image/png" ||
+    file.raw.type == "image/jpeg" ||
+    file.raw.type == "image/jpg";
   if (!isImage) {
     ElMessage.error("请上传图片文件");
     return false;
@@ -181,7 +187,7 @@ const handleImgChange = (file: any, fileList: any[]) => {
     return false;
   }
   selectedFile.value = file.raw;
-  console.log("caocaocao")
+  console.log("caocaocao");
   fileList.value = fileList;
   return true;
 };

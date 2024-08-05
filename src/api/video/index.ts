@@ -23,7 +23,7 @@ export function delVideoById(id: string) {
 //模糊搜索视频
 export function getVideoByName(value: string, page: number) {
   return r.request<string[]>({
-    url: `http://localhost:8081/api/user/video/list`,
+    url: `http://localhost:8081/api/admin/video/list`,
     method: `get`,
     params: {
       keyword: value,

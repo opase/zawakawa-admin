@@ -15,7 +15,7 @@ export const tokenKey = storagePrefixKey+"User"
 export const userInfoKey = storagePrefixKey+"userInfo"
 
 
-export const appName = "VueElementUiAdmin"
+export const appName = "zawakawaAdmin"
 
 export const pageSizesArr = [30, 60, 100]
 

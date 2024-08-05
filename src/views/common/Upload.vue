@@ -11,13 +11,13 @@
     >
       <el-icon><Plus /></el-icon>
       <div class="el-upload__text">点击或拖拽文件到此处上传</div>
-      <div class="el-upload__text">支持mp4、wmv、raw</div>
+      <div class="el-upload__text">支持mp4</div>
       <template #tip>
         <div class="el-upload__tip">视频文件需要小于2GB</div>
       </template>
     </el-upload>
     <div>
-      <el-button type="primary" @click="handleUpload">上传</el-button>
+      <el-button type="primary" @click="handleUpload">上传视频</el-button>
       <el-button type="error" @click="">取消</el-button>
     </div>
   </div>
@@ -40,19 +40,14 @@ export default defineComponent({
     const selectedFile = ref<File | null>(null);
 
     const handleFileChange = (file: any, fileList: any[]) => {
-      // if (
-      //   [
-      //     "video/mp4",
-      //     "video/ogg",
-      //     "video/flv",
-      //     "video/avi",
-      //     "video/wmv",
-      //     "video/rmvb",
-      //   ].indexOf(file.type) == -1
-      // ) {
-      //   ElMessage.error("请上传正确的视频格式");
-      //   return false;
-      // }
+      if (
+        [
+          "video/mp4",
+        ].indexOf(file.type) == -1
+      ) {
+        ElMessage.error("请上传正确的视频格式");
+        return false;
+      }
       const isLimited = file.size / 1024 / 1024 / 1024 < 2;
       if (!isLimited) {
         ElMessage.error("视频文件需要小于2GB");

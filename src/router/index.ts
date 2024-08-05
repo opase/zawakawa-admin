@@ -4,7 +4,7 @@ import {System} from "./modules/component"
 import {User} from "./modules/user"
 import {createRouter, createWebHashHistory, RouteRecordRaw} from 'vue-router'
 
-//这里可以根据权限做动态路由
+//动态路由
 const menuRoute: RouteRecordRaw[] = [
   Dashboard,
   System,
