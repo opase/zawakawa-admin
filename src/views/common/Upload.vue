@@ -40,11 +40,14 @@ export default defineComponent({
     const selectedFile = ref<File | null>(null);
 
     const handleFileChange = (file: any, fileList: any[]) => {
-      if (
-        [
-          "video/mp4",
-        ].indexOf(file.type) == -1
-      ) {
+      // 获取文件名
+      const fileName = file.name;
+      // 获取文件后缀
+      const fileExtension = fileName
+        .slice(((fileName.lastIndexOf(".") - 1) >>> 0) + 2)
+        .toLowerCase();
+      // 检查文件后缀是否是 mp4
+      if (fileExtension !== "mp4") {
         ElMessage.error("请上传正确的视频格式");
         return false;
       }
@@ -63,8 +66,8 @@ export default defineComponent({
         try {
           const md5 = await calculateMD5(selectedFile.value);
           const uploadedChunks = await checkFile(md5);
-          const url = await uploadFile(selectedFile.value, md5, uploadedChunks)
-          emit('fileUploaded', url);
+          const url = await uploadFile(selectedFile.value, md5, uploadedChunks);
+          emit("fileUploaded", url);
           ElMessage.success("上传完成");
         } catch (error) {
           ElMessage.error("上传失败");

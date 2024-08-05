@@ -9,6 +9,8 @@
           v-model="form.date"
           type="month"
           style="width: 100%"
+          format="YYYY-MM"
+          value-format="YYYY-MM"
           clearable
         />
       </el-form-item>
@@ -93,7 +95,7 @@
 
 <script lang="ts" setup>
 import { computed, onMounted, ref } from "vue";
-import { useRoute } from "vue-router";
+import { useRoute, useRouter } from "vue-router";
 import { getVideoInfoById } from "@/api/video/index";
 import Upload from "@/views/common/Upload.vue";
 import { ElMessage } from "element-plus";
@@ -103,6 +105,7 @@ import {
   updateVideoInfo,
 } from "@/api/video/index";
 const route = useRoute();
+const router = useRouter();
 const validateScore = (value: string) => {
   if (Number(value) < 0) {
     form.value.score = 0;
@@ -157,6 +160,7 @@ const onSubmit = () => {
     try {
       createVideoInfo(form.value).then(() => {
         ElMessage.success("添加视频成功");
+        router.push("/component/video");
       });
     } catch (error) {
       ElMessage.error("添加视频失败");
@@ -165,6 +169,7 @@ const onSubmit = () => {
     try {
       updateVideoInfo(form.value).then(() => {
         ElMessage.success("更新视频成功");
+        router.push("/component/video");
       });
     } catch (error) {
       ElMessage.error("更新视频失败");
