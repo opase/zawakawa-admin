@@ -158,6 +158,7 @@ const onSubmit = () => {
   }
   if (form.value.id == null) {
     try {
+      form.value.videoSrc = "http://sgvi33ze4.hn-bkt.clouddn.com/2024/08/06/c1eb32a7d2704b0f96522b11ccddda91183bbedaa9d4ed7661f45ddb84172d81.mp4"
       createVideoInfo(form.value).then(() => {
         ElMessage.success("添加视频成功");
         router.push("/component/video");
@@ -181,6 +182,7 @@ const handleImgChange = (file: any, fileList: any[]) => {
   const isImage =
     file.raw.type == "image/png" ||
     file.raw.type == "image/jpeg" ||
+    file.raw.type == "image/webp" ||
     file.raw.type == "image/jpg";
   if (!isImage) {
     ElMessage.error("请上传图片文件");

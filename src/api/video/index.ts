@@ -7,7 +7,7 @@ export function getVideos(page: number) {
     method: "get",
     params: {
       page: page,
-      pageSize: 4,
+      pageSize: 5,
     },
   });
 }
