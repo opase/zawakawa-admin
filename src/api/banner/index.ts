@@ -3,7 +3,7 @@ import  r  from "@/utils/request.ts"
 //获取banner列表
 export function getBanner()  {
   return r.request<string[]>({
-    url: 'http://localhost:8081/api/user/banner',
+    url: `/api/user/banner`,
     method: 'get',
   })
 }
@@ -11,7 +11,7 @@ export function getBanner()  {
 //添加banner
 export function addBanner(value: { title: string; imgSrc: string})  {
   return r.request({
-    url: 'http://localhost:8081/api/admin/banner',
+    url: `/api/admin/banner`,
     method: 'post',
     data: value
   })
@@ -20,7 +20,7 @@ export function addBanner(value: { title: string; imgSrc: string})  {
 //添加banner
 export function updateBanner(value: {id: string; title: string; imgSrc: string; description: string; type: string })  {
   return r.request({
-    url: 'http://localhost:8081/api/admin/banner',
+    url: `/api/admin/banner`,
     method: 'put',
     data: value
   })
@@ -29,7 +29,7 @@ export function updateBanner(value: {id: string; title: string; imgSrc: string; 
 //删除banner
 export function delBanner(id: string) {
   return r.request({
-    url: `http://localhost:8081/api/admin/banner/${id}`,
+    url: `/api/admin/banner/${id}`,
     method: 'delete'
   })
 }
@@ -37,7 +37,7 @@ export function delBanner(id: string) {
 //查找banner
 export function searchBanner(keyword: string) {
   return r.request({
-    url: `http://localhost:8081/api/admin/banner`,
+    url: `/api/admin/banner`,
     method: 'get',
     params: {value: keyword},
   })
