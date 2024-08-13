@@ -1,5 +1,6 @@
 import SparkMD5 from "spark-md5";
-import { uploadFileByChunk, askChunk, uploadedUrl } from "@/api/video/index";
+import { uploadFileByChunk, askChunk } from "@/api/video/index";
+import { ElMessage } from "element-plus";
 
 /**
  * 计算文件的 MD5 值
@@ -82,7 +83,6 @@ export async function uploadChunk(
  * @param file 文件对象
  * @param md5 文件的 MD5 值
  * @param uploadedChunks 已上传的分片索引数组
- * @returns url
  */
 export async function uploadFile(
   file: File,
@@ -105,11 +105,10 @@ export async function uploadFile(
       // 上传当前分片
       await uploadChunk(chunk, md5, currentChunk, chunks);
 
-      // 可选：报告进度
+      // 报告进度
       console.log(`分片 ${currentChunk + 1} 上传成功`);
+      ElMessage.info(`分片 ${currentChunk + 1} 上传成功`);
     }
-    const url =await uploadedUrl(md5);
-    return url;
   } catch (error) {
     throw new Error(`分片上传失败`);
   }

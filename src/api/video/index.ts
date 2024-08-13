@@ -61,14 +61,6 @@ export function uploadFileByChunk(formData: any) {
   });
 }
 
-//获取视频url
-export function uploadedUrl(hash: string): Promise<string> {
-  return r.request<{ data: string }>({
-    url: `/api/admin/video/upload-video/${hash}`,
-    method: 'get'
-  }).then(res => res.data.data);
-}
-
 //上传封面获取url
 export function uploadCover(formData: any) {
   return r.request<{data: string}>({
@@ -79,19 +71,21 @@ export function uploadCover(formData: any) {
 }
 
 //新增视频
-export function createVideoInfo(value: { title: string; imgSrc: string; date:string; type:number; producer:string; score:number; category:string; description:string; episode:number; videoSrc:string})  {
+export function addVideoInfo(videoMd5: string,value: { title: string; imgSrc: string; date:string; type:number; producer:string; score:number; category:string; description:string; episode:number; videoSrc:string})  {
   return r.request({
     url: `/api/admin/video`,
     method: 'post',
+    params: { md5: videoMd5 },
     data: value
   })
 }
 
 //更新视频
-export function updateVideoInfo(value: {id:string; title: string; imgSrc: string; date:string; type:number; producer:string; score:number; category:string; description:string; episode:number; videoSrc:string})  {
+export function updateVideoInfo(videoMd5: string,value: {id:string; title: string; imgSrc: string; date:string; type:number; producer:string; score:number; category:string; description:string; episode:number; videoSrc:string})  {
   return r.request({
     url: `/api/admin/video`,
     method: 'put',
+    params: { md5: videoMd5 },
     data: value
   })
 }

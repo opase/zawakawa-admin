@@ -38,7 +38,7 @@ export default defineComponent({
   setup(_, { emit }) {
     const fileList = ref<any[]>([]);
     const selectedFile = ref<File | null>(null);
-
+    const md5 = ref<string>('');
     const handleFileChange = (file: any, fileList: any[]) => {
       // 获取文件名
       const fileName = file.name;
@@ -64,10 +64,10 @@ export default defineComponent({
     const handleUpload = async () => {
       if (selectedFile.value) {
         try {
-          const md5 = await calculateMD5(selectedFile.value);
-          const uploadedChunks = await checkFile(md5);
-          const url = await uploadFile(selectedFile.value, md5, uploadedChunks);
-          emit("fileUploaded", url);
+          md5.value = await calculateMD5(selectedFile.value);
+          const uploadedChunks = await checkFile(md5.value);
+          await uploadFile(selectedFile.value, md5.value, uploadedChunks);
+          emit("fileUploaded", md5.value);
           ElMessage.success("上传完成");
         } catch (error) {
           ElMessage.error("上传失败");

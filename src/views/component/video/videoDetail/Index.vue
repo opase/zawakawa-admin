@@ -101,7 +101,7 @@ import Upload from "@/views/common/Upload.vue";
 import { ElMessage } from "element-plus";
 import {
   uploadCover,
-  createVideoInfo,
+  addVideoInfo,
   updateVideoInfo,
 } from "@/api/video/index";
 const route = useRoute();
@@ -117,7 +117,7 @@ const validateScore = (value: string) => {
 };
 const fileList = ref<any[]>([]);
 const selectedFile = ref<File | null>(null);
-
+const videoMd5 = ref<string>();
 const form = ref({
   id: "",
   title: "",
@@ -158,8 +158,7 @@ const onSubmit = () => {
   }
   if (form.value.id == null) {
     try {
-      form.value.videoSrc = "http://sgvi33ze4.hn-bkt.clouddn.com/2024/08/06/c1eb32a7d2704b0f96522b11ccddda91183bbedaa9d4ed7661f45ddb84172d81.mp4"
-      createVideoInfo(form.value).then(() => {
+        addVideoInfo(videoMd5.value, form.value).then(() => {
         ElMessage.success("添加视频成功");
         router.push("/component/video");
       });
@@ -168,7 +167,7 @@ const onSubmit = () => {
     }
   } else {
     try {
-      updateVideoInfo(form.value).then(() => {
+      updateVideoInfo(videoMd5.value, form.value).then(() => {
         ElMessage.success("更新视频成功");
         router.push("/component/video");
       });
@@ -194,12 +193,11 @@ const handleImgChange = (file: any, fileList: any[]) => {
     return false;
   }
   selectedFile.value = file.raw;
-  console.log("caocaocao");
   fileList.value = fileList;
   return true;
 };
-const handleFileUploaded = (url: string) => {
-  form.value.videoSrc = url;
+const handleFileUploaded = (md5: string) => {
+  videoMd5.value = md5;
 };
 const handleCoverUpload = async () => {
   if (selectedFile.value) {
