@@ -215,8 +215,8 @@ zawakawa-admin/
 │   │   │   └── video/
 │   │   │       ├── Index.vue             #   视频列表
 │   │   │       ├── videoDetail/Index.vue  #   视频详情/添加/编辑
-│   │   │       ├── comment/Index.vue      #   评论管理（占位）
-│   │   │       └── danmaku/Index.vue      #   弹幕管理（占位）
+│   │   │       ├── comment/Index.vue      #   评论管理
+│   │   │       └── danmaku/Index.vue      #   弹幕管理
 │   │   ├── dashboard/Index.vue           #   仪表盘首页
 │   │   └── layout/                       #   布局组件
 │   │       ├── MainLayout.vue            #     主布局容器
@@ -251,8 +251,8 @@ zawakawa-admin/
 | **视频详情** | 视频信息编辑（标题、评分、主演、类别、集数、封面等） | ✅ 已完成 |
 | **视频上传** | MP4 大文件分片上传（最大 2GB），MD5 计算，断点续传 | ✅ 已完成 |
 | **封面上传** | 视频封面图片上传（PNG/JPEG/WebP） | ✅ 已完成 |
-| **评论管理** | 根据视频 ID 管理评论 | 🚧 占位 |
-| **弹幕管理** | 根据视频 ID 管理弹幕 | 🚧 占位 |
+| **评论管理** | 根据视频 ID 管理评论 | ✅ 已完成 |
+| **弹幕管理** | 根据视频 ID 管理弹幕 | ✅ 已完成 |
 
 ### 系统功能
 
